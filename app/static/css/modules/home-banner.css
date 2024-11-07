@@ -1,0 +1,103 @@
+@import "./geral.css";
+
+.banner {
+  height: 550px;
+  background: url("../../img/BannerPrincipal.jpg") center / cover no-repeat;
+  display: grid;
+  grid-template-columns: 1fr 100%;
+}
+.banner div {
+  grid-column: 2;
+  font-family: var(--fonte-corpo);
+  font-size: 25px;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: center;
+  margin-right: 120px;
+  gap: 40px;
+}
+
+.banner div .btn {
+  grid-column: 1;
+  justify-self: flex-end;
+}
+
+.banner div h1 {
+  text-align: right;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  letter-spacing: 1px;
+  align-self: flex-end;
+}
+.btn-ajude {
+  padding: 15px 44px 15px 20px;
+  border-radius: 2px;
+  border: 3px solid #fff;
+  background: rgba(255, 255, 255, 0.1) url("../../img/seta.svg") no-repeat 205px
+    center;
+  backdrop-filter: blur(2px);
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
+  justify-self: end;
+  transition: transform 0.3s, border-radius 0.3s;
+}
+.btn-ajude:hover {
+  transform: scale(1.05);
+  transition: all ease 0.3s;
+}
+@media (max-width: 768px) {
+  .banner {
+    height: 272px;
+    background: url("../../img/BannerPrincipal-sm-768.jpg") center / cover
+      no-repeat;
+  }
+  .banner div {
+    font-size: 15px;
+    max-width: 100%;
+  }
+  .btn-ajude {
+    padding: 10px 44px 10px 10px;
+  }
+}
+@media (max-width: 500px) {
+  .banner {
+    background: url("../../img/BannerPrincipal-sm-500.jpg") center / cover
+      no-repeat;
+  }
+  .banner div {
+    font-size: 10px;
+  }
+}
+@media (max-width: 472px) {
+  .banner {
+    background: url("../../img/BannerPrincipal-sm-428.jpg") center / cover
+      no-repeat;
+  }
+  .btn-ajude {
+    padding: 10px 40px 10px 10px;
+    background-position: 195px;
+  }
+}
+@media (max-width: 428px) {
+  .banner {
+    background: url("../../img/BannerPrincipal-sm-428.jpg") center / cover
+      no-repeat;
+  }
+  .banner div {
+    margin-right: 20px;
+  }
+}
+@media (max-width: 390px) {
+  .banner {
+    background: url("../../img/BannerPrincipal-sm-390.jpg") center / cover
+      no-repeat;
+  }
+}
+@media (max-width: 360px) {
+  .banner {
+    background: url("../../img/BannerPrincipal-sm-360.jpg") center / cover
+      no-repeat;
+  }
+}

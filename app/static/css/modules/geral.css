@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --cor-primaria: #007175;
+  --cor-detaque: #e65640;
+  --cor-base: #333333;
+  --cor-texto: #20212b;
+  --cor-detaque-hover: #bf2f1a;
+  --fonte-corpo: "Work Sans", sans-serif;
+  --fonte-titulo: "Cormorant Infant", serif;
+}
+
+li {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.container {
+  padding: 5px 320px;
+}
+
+.title {
+  font-family: var(--fonte-titulo);
+  font-size: 45px;
+  font-weight: 600;
+  margin-bottom: 60px;
+  position: relative;
+  text-align: center;
+  &::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 8px;
+    background-color: var(--cor-detaque);
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    transform: translate(-50%, -50%);
+  }
+}
+.subtitle {
+  font-family: var(--fonte-corpo);
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.cp {
+  color: var(--cor-primaria);
+}
+
+.title-dados {
+  font-family: var(--fonte-corpo);
+  font-size: 22px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.text-serif-dados {
+  font-family: var(--fonte-titulo);
+  font-size: 46px;
+  color: var(--cor-detaque);
+  font-weight: 600;
+}
+
+.text-serif-dados-bold {
+  font-family: var(--fonte-titulo);
+  font-size: 46px;
+  color: var(--cor-detaque);
+  font-weight: 700;
+}
+
+.cd {
+  color: var(--cor-detaque);
+}
+
+.btn-doar {
+  display: inline-block;
+  background-color: var(--cor-detaque);
+  padding: 14px 35px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  font-variant: normal;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  &:hover {
+    background-color: var(--cor-detaque-hover);
+    transition: 0.3s;
+  }
+}
+.active {
+  height: 100%;
+  transition: 300ms;
+  visibility: visible;
+}
+
+@media (max-width: 1630px) {
+  .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .container {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
