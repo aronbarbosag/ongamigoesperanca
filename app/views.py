@@ -33,3 +33,7 @@ def eventos(request):
 
 def area_restrita(request):
     return render(request, "app/area-restrita.html", {"idBody": "area-restrita"})
+
+
+def custom_404(request, exception):
+    return render(request, "app/404.html", {"idBody": "doacao"})

@@ -1,0 +1,29 @@
+{% extends './partials/base.html' %}
+{% load static %}
+
+{% block title %}
+404
+{% endblock %}
+
+{% block content %}
+
+
+
+<img class="bannerdoacao" src="{% static 'img/banner404.jpg'%}">
+
+
+
+<section class="container" style="margin-bottom: 90px;">
+  <div class="sobre-container-doacao" data-aos="fade-up">
+    <div class="sobre-item-doacao">
+      <h1 class="title">Página não encontrada</h1>
+      <p>Não conseguimos localizar a página que você está procurando!</p>
+    </div>
+  </div>
+</section>
+{%endblock%}
+
+{% block script %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{% static 'js/animation.js' %}"></script>
+{% endblock script %}
