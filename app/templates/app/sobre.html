@@ -1,0 +1,44 @@
+{% extends './partials/base.html' %}
+{% load static %}
+
+{% block title %}
+  Sobre a Ong
+{% endblock %}
+
+{% block content %}
+  <div class="banner-sobre">
+    <img src="{% static 'img/banner-sobre.jpg' %}" alt="" />
+  </div>
+
+  <section class="sobre-container container" data-aos="fade-up">
+    <div class="sobre-item">
+      <h1 class="title">Sobre Nós</h1>
+      <p>A ONG Amigo Esperança nasceu em Blumenau, Santa Catarina, em resposta a uma tragédia que impactou profundamente a região. Durante uma grave catástrofe que atingiu a comunidade, um grupo de voluntários se mobilizou para oferecer apoio imediato às famílias afetadas, levando suprimentos, conforto e, acima de tudo, esperança. O que começou como uma ação emergencial, em um momento de extrema necessidade, logo se transformou em algo maior e mais duradouro.</p>
+      <br />
+      <p>Com o tempo, a Amigo Esperança expandiu seu propósito. Ao perceber que os efeitos de uma catástrofe vão muito além do momento de crise, a ONG redirecionou seu foco para o desenvolvimento social e educacional das crianças e adolescentes em situação de vulnerabilidade. Investir no futuro da comunidade passou a ser nossa missão central, com a crença de que a transformação começa pela garantia de direitos e pela oferta de oportunidades.</p>
+      <br />
+      <p>Hoje, após anos de dedicação e trabalho incansável, a Amigo Esperança atua diretamente com crianças e adolescentes da região, oferecendo programas educativos, apoio psicológico, atividades culturais e esportivas, além de acompanhamento familiar. Nosso objetivo é proporcionar a esses jovens um ambiente seguro e acolhedor, onde possam se desenvolver de forma plena e construir um futuro melhor.</p>
+    </div>
+  </section>
+
+  <section class="nossos-valores-container container" data-aos="fade-right">
+    <div class="nossos-valores-item">
+      <div>
+        <h1 class="text-serif-dados-bold">Nossos Valores</h1>
+        <p>Acreditamos que o verdadeiro impacto social começa com valores sólidos que orientam todas as nossas ações. Solidariedade, respeito e desenvolvimento pessoal estão no centro de tudo o que fazemos.</p>
+      </div>
+      <div>
+        <img src="{% static 'img/nossos-valores.png' %}" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <article class="container" data-aos="fade-up" data-aos-delay="500">
+    <h1 class="title">Nosso compromisso é criar oportunidades, transformar vidas e fortalecer a comunidade, sempre guiados pela esperança que nos uniu desde o início.</h1>
+  </article>
+{% endblock %}
+
+{% block script %}
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="{% static 'js/animation.js' %}"></script>
+{% endblock %}

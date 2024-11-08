@@ -1,0 +1,35 @@
+{% extends './partials/base.html' %}
+{% load static %}
+
+{% block title %}
+  Área Restrita
+{% endblock %}
+
+{% block content %}
+  <div class="banner-sobre"></div>
+  <section class="sobre-container container" data-aos="fade-up">
+    <div class="sobre-item">
+      <h1 class="title">Área Restrita</h1>
+    </div>
+  </section>
+  <main class="container">
+    <form action="" method="post">
+      {% csrf_token %}
+      <div>
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" />
+      </div>
+
+      <div>
+        <label for="senha">Senha</label>
+        <input type="password" name="password" id="password" />
+      </div>
+
+      <button class="btn-acessar">Acessar</button>
+    </form>
+  </main>
+{% endblock %}
+{% block script %}
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="{% static 'js/animation.js' %}"></script>
+{% endblock %}

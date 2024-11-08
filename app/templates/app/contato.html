@@ -1,0 +1,69 @@
+{% extends './partials/base.html' %}
+{% load static %}
+
+{% block title %}
+  Contato
+{% endblock %}
+
+{% block content %}
+  <div class="banner-sobre">
+    <img src="{% static 'img/banner-contato.jpg' %}" alt="" />
+  </div>
+  <section class="sobre-container container" data-aos="fade-up">
+    <div class="sobre-item">
+      <h1 class="title" id="cont">Fale Conosco</h1>
+      <p style="text-align: center">Você pode entrar em contato conosco através de e-mail, telefone ou preenchendo o formulário abaixo. Estamos à disposição para ajudar!</p>
+    </div>
+  </section>
+  <main class="container">
+    <div class="contato-grid-container">
+      <div class="info-contato" data-aos="fade-right" data-aos-delay="500">
+        <h1>Entre em contato</h1>
+        <ul>
+          <li>E-mail</li>
+          <li>ongamigoesperanca@gmail.com</li>
+        </ul>
+        <ul>
+          <li>Telefone</li>
+          <li>(47) 99957-3930</li>
+        </ul>
+        <ul>
+          <li>Endereço</li>
+          <li>Rua Erich Belz, 1257, Itoupava Central - Blumenau/SC</li>
+        </ul>
+      </div>
+
+      <div class="form-contato" data-aos="fade-left" data-aos-delay="600">
+        <h1 style="margin-bottom: 20px">Preencha o formulário abaixo para que possamos ajudar com suas dúvidas!</h1>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div>
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" />
+          </div>
+
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" />
+          </div>
+
+          <div>
+            <label for="comentario">Comentários / Perguntas:</label>
+            <textarea name="comentario" id="comentario"></textarea>
+          </div>
+
+          <div>
+            <button type="submit">
+              Enviar
+              <img src="{% static 'img/btn-seta-icon.svg' %}" alt="" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+{% block script %}
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="{% static 'js/animation.js' %}"></script>
+{% endblock %}

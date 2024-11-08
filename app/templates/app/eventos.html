@@ -1,0 +1,41 @@
+{% extends './partials/base.html' %}
+{% load static %}
+
+{% block title %}
+  Eventos
+{% endblock %}
+
+{% block content %}
+  <div class="banner-sobre">
+    <img src="{% static 'img/banner-eventos.jpg' %}" alt="" />
+  </div>
+  <section class="sobre-container container" data-aos="fade-up">
+    <div class="sobre-item">
+      <h1 class="title">Eventos</h1>
+      <p style="text-align: center">Confira aqui todos os nossos próximos eventos.</p>
+    </div>
+  </section>
+  <main class="container">
+    <div class="evento-item">
+      <h1>Pedágio Amigo Esperança</h1>
+      <img src="{% static 'img/evento-pedagio.jpg' %}" alt="" />
+      <h1>19 de outubro de 2024</h1>
+      <p>
+        Horários: <span class="cp">9h às 13h</span>
+      </p>
+      <p>
+        Informações: <span class="cp">47 99957393</span>
+      </p>
+      <div>
+        <a href="https://www.instagram.com/p/DAqx8sypqaX/" target="_blank" class="cp">
+          Ver postagem
+          <img src="{% static 'img/ver-postagem-seta.svg' %}" alt="" />
+        </a>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+{% block script %}
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="{% static 'js/animation.js' %}"></script>
+{% endblock %}

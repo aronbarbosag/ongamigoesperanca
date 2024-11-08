@@ -1,0 +1,177 @@
+{% extends './partials/base.html' %}
+{% load static %}
+
+{% block title %}
+Quero Doar
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+
+<img class="bannerdoacao" src="{% static 'img/doacao-banner.jpg'%}">
+
+
+
+<section class="container">
+  <div class="sobre-container-doacao" data-aos="fade-up">
+    <div class="sobre-item-doacao">
+      <h1 class="title">Doação</h1>
+      <p>Em Bluemanu, muitas crianças enfrentam desafios significativos devido à vulnerabilidade social. A ONG, com suas unidades em Erich Belz e Vila Jensen, desempenha um papel crucial ao oferecer apoio fundamental como alimentação, educação e suporte emocional para esses jovens que precisam de ajuda.</p>
+      <br>
+      <p>Sua doação é vital para garantir que esses serviços continuem a funcionar e se expandam, permitindo que mais crianças superem suas dificuldades e tenham acesso a uma vida mais digna. Além disso, sua contribuição apoia projetos que promovem inclusão social e criam oportunidades de crescimento para esses jovens, abrindo portas para um futuro mais brilhante.</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="carrossel-doacao" data-aos="fade-right">
+
+  <div class='slider' > 
+
+    <div class="slides"> 
+      <input type="radio" name="radio-btn" id="radio1">
+      <input type="radio" name="radio-btn" id="radio2">
+      <input type="radio" name="radio-btn" id="radio3">
+      <input type="radio" name="radio-btn" id="radio4">
+
+      <div class="slide first"> <!--inicio de imagens -->
+        <img src="{%static 'img/50real.jpg'%}" alt="imagem 1">
+        <div class="info">
+          <div class="ctrl">
+            <h1>R$ 50</h1><br>
+            <p>Apoia na aquisição de materiais didáticos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <img src="{%static 'img/100real.jpg'%}" alt="imagem 2">
+        <div class="info">
+          <div class="ctrl">
+            <h1>R$ 100</h1><br>
+            <p>Apoia o projeto alimentar na aquisição de refeições para as crianças.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <img src="{%static 'img/250real.jpg'%}" alt="imagem 3">
+        <div class="info">
+          <div class="ctrl">
+            <h1>R$ 250</h1><br>
+            <p>Apoia na elaboração de novos eventos para os nossos alunos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide"> <!--fim de imagens -->
+        <img src="{%static 'img/1000real.jpg'%}" alt="imagem 4">
+        <div class="info">
+          <div class="ctrl">
+            <h1>R$ 1000</h1><br>
+            <p>Apoia o trabalho mensal dos professores da ONG.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-auto">
+        <div class="auto-btn1"></div>
+        <div class="auto-btn2"></div>
+        <div class="auto-btn3"></div>
+        <div class="auto-btn4"></div>
+      </div>
+
+      <div class="manual-navigation">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+        <label for="radio4" class="manual-btn"></label>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>
+
+
+<div class="fundo-valores">
+  <section class="container">
+    <div class="container-outside-valores">
+      <div class="container-inside-valores">
+       
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<div class="frase">
+  <p>Doações de materias podem ser enviadas para:</p>
+  <br><br>
+  <p class="second">Rua Erich Belz, 1257, Itoupava Central, Blumenau</p>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+
+
+
+
+<script>
+  let count = 1;
+  let intervalId;
+  let click = false;
+
+  document.getElementById("radio1").checked = true;
+
+  function startCycle() {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    intervalId = setInterval(function () {
+      if (!click) {
+        proximagem();
+      }
+    }, 4500);
+  }
+
+  function proximagem() {
+    count++;
+    if (count > 4) {
+      count = 1;
+    }
+
+    document.getElementById("radio" + count).checked = true;
+  }
+
+  const radios = document.querySelectorAll('input[name="radio-btn"]');
+  radios.forEach(radio => {
+    radio.addEventListener('click', function () {
+      click = true;
+
+      startCycle();
+
+      setTimeout(() => {
+        click = false;
+      }, 500);
+    });
+  });
+
+  startCycle();
+
+  
+ 
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{% static 'js/animation.js' %}"></script>
+
+{% endblock script %}
+

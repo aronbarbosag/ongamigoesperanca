@@ -1,4 +1,4 @@
-{% extends 'partials/base.html' %}
+{% extends './partials/base.html' %}
 {% load static %}
 
 {% block title %}
@@ -13,7 +13,7 @@
         futuro com mais esperança e dignidade
       </h1>
 
-      <a href="" class="btn-ajude">ajude nossa causa</a>
+      <a href="{% url 'doacao' %}" class="btn-ajude">ajude nossa causa</a>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="400">
           <a>
             <div class="card-img">
-              <img src="{% static %}' img/card-img-jiujitsu.jpg'" alt="" />
+              <img src="{% static 'img/card-img-jiujitsu.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">jiu jitsu</p>
@@ -47,7 +47,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="450">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-capoeira.jpg'" alt="" />
+              <img src="{% static 'img/card-img-capoeira.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">capoeira</p>
@@ -63,7 +63,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="500">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-karate.jpg'" alt="" />
+              <img src="{% static 'img/card-img-karate.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">karatê</p>
@@ -79,7 +79,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="400">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-futebol.jpg'" alt="" />
+              <img src="{% static 'img/card-img-futebol.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">futebol</p>
@@ -95,7 +95,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="450">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-ingles.jpg'" alt="" />
+              <img src="{% static 'img/card-img-ingles.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">inglês</p>
@@ -111,7 +111,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="500">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-conversa.jpg'" alt="" />
+              <img src="{% static 'img/card-img-conversa.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">culturais</p>
@@ -127,7 +127,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="400">
           <a>
             <div class="card-img">
-              <img src="{% static %}' img/card-img-musicais.jpg'" alt="" />
+              <img src="{% static 'img/card-img-musicais.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">musicais</p>
@@ -143,7 +143,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="450">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-meditacao.jpg'" alt="" />
+              <img src="{% static 'img/card-img-meditacao.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">meditação</p>
@@ -159,7 +159,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="500">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-yoga.jpg'" alt="" />
+              <img src="{% static 'img/card-img-yoga.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">yoga</p>
@@ -175,7 +175,7 @@
         <div class="card" data-aos="fade-right" data-aos-delay="400">
           <a>
             <div class="card-img">
-              <img src="{% static %} 'img/card-img-alimentacao.jpg'" alt="" />
+              <img src="{% static 'img/card-img-alimentacao.jpg' %}" alt="" />
             </div>
             <div class="card-title">
               <p class="subtitle cp">alimentação</p>
@@ -217,13 +217,13 @@
             Suas doações apoiam nossa capacidade de atender
             <span class="cd">mais de 600</span> crianças mensais e a continuar transformando vidas em <span class="cd">Blumenau</span>.
           </p>
-          <a href="" class="btn-doar">doe agora</a>
+          <a href="{% url 'doacao' %}" class="btn-doar">doe agora</a>
         </div>
 
         <div class="doacao-valores">
           <ul>
             <li>
-              <img src="{% static %}' img/livro.svg'" alt="" data-aos="zoom-in-up" />
+              <img src="{% static 'img/livro.svg' %}" alt="" data-aos="zoom-in-up" />
             </li>
             <li>
               R$ <span class="counter" data-target="50">0</span>
@@ -232,7 +232,7 @@
           </ul>
           <ul>
             <li>
-              <img src="{% static %} 'img/garfofaca.svg'" alt="" data-aos="zoom-in-up" />
+              <img src="{% static 'img/garfofaca.svg' %}" alt="" data-aos="zoom-in-up" />
             </li>
             <li>
               R$ <span class="counter" data-target="100">0</span>
@@ -241,7 +241,7 @@
           </ul>
           <ul>
             <li>
-              <img src="{% static %} 'img/teacher.svg'" alt="" data-aos="zoom-in-up" />
+              <img src="{% static 'img/teacher.svg' %}" alt="" data-aos="zoom-in-up" />
             </li>
             <li>
               R$ <span class="counter" data-target="250">0</span>
@@ -250,7 +250,7 @@
           </ul>
           <ul>
             <li>
-              <img src="{% static %} 'img/pc.svg'" alt="" data-aos="zoom-in-up" />
+              <img src="{% static 'img/pc.svg' %}" alt="" data-aos="zoom-in-up" />
             </li>
             <li>
               R$<span class="counter" data-target="1000">0</span>
@@ -265,6 +265,7 @@
       <div class="coleta-email-item" data-aos="fade-up">
         <h1>Junte-se a nossa lista de e-mails, inscreva-se abaixo</h1>
         <form action="" method="POST">
+          {% csrf_token %}
           <label for="nome">Nome <span class="cd">*</span></label>
           <input type="text" id="nome" name="nome" />
           <label for="sobrenome">Sobrenome <span class="cd">*</span></label>
@@ -292,5 +293,5 @@
     window.addEventListener('resize', updateAosDelay)
   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="{% static %} 'js/animation.js'"></script>
+  <script src="{% static 'js/animation.js' %}"></script>
 {% endblock %}
