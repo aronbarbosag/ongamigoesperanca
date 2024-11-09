@@ -22,4 +22,5 @@ from django.urls import path, reverse, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("app.urls")),
+    path('pix/', include('pix.urls')),
 ]
