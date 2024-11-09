@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date
+import datetime
 
 
 class Crianca(models.Model):
@@ -20,6 +20,10 @@ class Crianca(models.Model):
     bairro = models.CharField(max_length=100, blank=True)
     cep = models.CharField(max_length=8, blank=True)
     telefone_responsavel = models.CharField(max_length=11)
+
+    def get_age(self):
+        age = datetime.date.today()-self.data_de_nascimento
+        return int((age).days/365.25)
 
     def __str__(self):
         return self.nome
