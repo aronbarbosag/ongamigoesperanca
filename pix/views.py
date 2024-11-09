@@ -156,6 +156,7 @@ def obter_detalhes_cobranca(id_loc, access_token):
         response = requests.get(
             detalhes_url, headers=headers, cert=cert_file, timeout=20)
         response.raise_for_status()
+
         return response.json()
     except requests.exceptions.RequestException as e:
         raise Exception(f"Erro ao obter detalhes da cobrança: {e}")

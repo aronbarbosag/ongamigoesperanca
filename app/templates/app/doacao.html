@@ -31,9 +31,9 @@ Quero Doar
 
 <div class="carrossel-doacao" data-aos="fade-right">
 
-  <div class='slider' > 
+  <div class='slider'>
 
-    <div class="slides"> 
+    <div class="slides">
       <input type="radio" name="radio-btn" id="radio1">
       <input type="radio" name="radio-btn" id="radio2">
       <input type="radio" name="radio-btn" id="radio3">
@@ -102,14 +102,19 @@ Quero Doar
 
 
 <div class="fundo-valores">
-  <section class="container">
+  <!-- <section class="container">
     <div class="container-outside-valores">
       <div class="container-inside-valores">
        
       </div>
     </div>
 
-  </section>
+  </section> -->
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Doar</button>
+  </form>
 </div>
 
 <div class="frase">
@@ -167,11 +172,10 @@ Quero Doar
 
   startCycle();
 
-  
- 
+
+
 </script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="{% static 'js/animation.js' %}"></script>
 
 {% endblock script %}
-
