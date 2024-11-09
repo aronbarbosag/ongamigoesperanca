@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagamento Realizado com Sucesso</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .container {
+        max-width: 800px;
+        margin-top: 50px;
+      }
+      .qr-code img {
+        width: 200px;
+        height: 200px;
+      }
+      .card {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Botão para abrir o modal -->
+      <button
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#successModal"
+      >
+        Ver Detalhes do Pagamento
+      </button>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="successModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="successModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">
+                Pagamento Gerado com Sucesso!
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Nome:</strong> {{ pagamento.nome }}</p>
+              <p><strong>Cpf:</strong> {{ pagamento.cpf }}</p>
+              <p><strong>TXID:</strong> {{ pagamento.txid }}</p>
+              <p><strong>Status:</strong> {{ pagamento.status }}</p>
+              <p><strong>Valor:</strong> R$ {{ pagamento.valor }} </p>
+
+              <div class="qr-code">
+                <h4>QR Code para Pagamento:</h4>
+                <img src="{{ pagamento.imagem_qrcode }}" alt="QR Code" />
+              </div>
+
+              <div class="mt-4">
+                <a
+                  href="{{ pagamento.link_visualizacao }}"
+                  target="_blank"
+                  class="btn btn-primary"
+                  >Ver Pagamento</a
+                >
+              </div>
+              <div class="mt-4">
+                <a
+                  class="btn btn-primary"
+                  onclick="copiarTexto('{{ pagamento.link_visualizacao }}')"
+                  >Pix copia e cola
+                </a>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <a href="{% url 'pix:gerar_pix' %}" class="btn btn-secondary"
+          >Voltar ao Formulário</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Scripts -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        $('#successModal').modal('show'); // Mostra o modal automaticamente ao carregar a página
+      });
+    </script>
+    <script>
+      function copiarTexto(texto) {
+        navigator.clipboard
+          .writeText(texto)
+          .then(() => {
+            alert('Texto copiado com sucesso!');
+          })
+          .catch((err) => {
+            alert('Falha ao copiar texto: ' + err);
+          });
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
