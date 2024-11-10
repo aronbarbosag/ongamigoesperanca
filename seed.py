@@ -7,51 +7,93 @@ from datetime import date, timedelta
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
-from app.models import Crianca, Atividade, Participacao
+from myapp.models import Filial, Necessidade_especial, Responsavel, Crianca, Atividade, Participacao
 
 fake = Faker('pt_BR')
 
-def create_atividade():
-    return Atividade.objects.create(
-        nome=fake.word()
-    )
+def create_filial():
+    filiais = []
+    unidades = [Filial.UNIDADE_1, Filial.UNIDADE_2]
+    for unidade in unidades:
+        filial, created = Filial.objects.get_or_create(nome_filial=unidade)
+        filiais.append(filial)
+    return filiais
 
-def create_crianca():
-    return Crianca.objects.create(
-        nome=fake.name(),
-        data_de_nascimento=fake.date_of_birth(minimum_age=3, maximum_age=12),
-        tamanho_camiseta=fake.random_element(elements=('P', 'M', 'G', 'GG')),
-        escola=fake.company(),
-        turno=fake.random_element(elements=('Matutino', 'Vespertino', 'Noturno', 'Integral')),
-        rua=fake.street_name(),
-        numero=fake.building_number(),
-        bairro=fake.city(),
-        cep=fake.random_number(digits=8, fix_len=True),
-        telefone_responsavel=fake.random_number(digits=11, fix_len=True)
-    )
-
-def create_participacao(crianca, atividade):
-    data_inicio = fake.date_this_year()
-    data_fim = data_inicio + timedelta(days=random.randint(1, 30))
-    return Participacao.objects.create(
-        nome=crianca,
-        atividade=atividade,
-        data_inicio=data_inicio,
-        data_fim=data_fim,
-        status=fake.random_element(elements=('INSCRITA', 'CONCLUIDA', 'CANCELADA'))
-    )
-
-def populate(n):
-    atividades = [create_atividade() for _ in range(5)]
+def create_necessidade_especial(n):
+    necessidades = []
     for _ in range(n):
-        crianca = create_crianca()
-        atividade = random.choice(atividades)
-        create_participacao(crianca, atividade)
+        necessidade = Necessidade_especial.objects.create(
+            descricao=fake.sentence(nb_words=6)
+        )
+        necessidades.append(necessidade)
+    return necessidades
+
+def create_responsavel(n):
+    responsaveis = []
+    for _ in range(n):
+        responsavel = Responsavel.objects.create(
+            nome=fake.name(),
+            telefone=fake.random_number(digits=11, fix_len=True),
+            email=fake.email(),
+            profissao=fake.job(),
+            local_de_trabalho=fake.company(),
+            grau_de_parentesco=fake.random_element(elements=('Pai', 'Mãe', 'Tio', 'Tia', 'Avô', 'Avó'))
+        )
+        responsaveis.append(responsavel)
+    return responsaveis
+
+def create_crianca(n, responsaveis, necessidades):
+    filiais = Filial.objects.all()
+    for _ in range(n):
+        crianca = Crianca.objects.create(
+            nome=fake.name(),
+            data_de_nascimento=fake.date_of_birth(minimum_age=3, maximum_age=12),
+            tamanho_camiseta=fake.random_element(elements=('P', 'M', 'G', 'GG')),
+            escola=fake.company(),
+            turno=fake.random_element(elements=('Matutino', 'Vespertino', 'Noturno', 'Integral')),
+            rua=fake.street_name(),
+            numero=fake.building_number(),
+            bairro=fake.city(),
+            cep=fake.random_number(digits=8, fix_len=True),
+            telefone_responsavel=fake.random_number(digits=11, fix_len=True),
+            filial=random.choice(filiais) if filiais else None,
+            necessidade_especial=random.choice(necessidades) if necessidades else None
+        )
+        crianca.responsavel.set(random.sample(responsaveis, k=random.randint(1, 3)))
+        crianca.save()
+
+def create_atividade(n):
+    for _ in range(n):
+        Atividade.objects.create(
+            nome=fake.word()
+        )
+
+def create_participacao(n):
+    criancas = Crianca.objects.all()
+    atividades = Atividade.objects.all()
+    for _ in range(n):
+        crianca = random.choice(criancas) if criancas else None
+        atividade = random.choice(atividades) if atividades else None
+        if crianca and atividade:
+            data_inicio = fake.date_this_year()
+            data_fim = data_inicio + timedelta(days=random.randint(1, 30))
+            Participacao.objects.create(
+                nome=crianca,
+                atividade=atividade,
+                data_inicio=data_inicio,
+                data_fim=data_fim,
+                status=fake.random_element(elements=('INSCRITA', 'CONCLUIDA', 'CANCELADA'))
+            )
 
 if __name__ == '__main__':
     try:
         print("Populando o banco de dados... Aguarde.")
-        populate(100)
+        filiais=create_filial()
+        necessidades = create_necessidade_especial(10)
+        responsaveis = create_responsavel(20)
+        create_crianca(50, responsaveis, necessidades)
+        create_atividade(7)
+        create_participacao(45)
         print("População concluída.")
     except Exception as e:
         print(f"Erro ao popular o banco de dados: {e}")
