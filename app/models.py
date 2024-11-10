@@ -4,6 +4,18 @@ import datetime
 # import django.utils.timezone.now
 
 
+class Responsavel(models.Model):
+    nome = models.CharField(max_length=100, null=True)
+    telefone = models.IntegerField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    profissao = models.CharField(max_length=100, blank=True, null=True)
+    local_de_trabalho = models.CharField(max_length=200, blank=True, null=True)
+    grau_de_parentesco = models.CharField(max_length=50, blank=True, null=True)
+    
+    def __str__(self):
+        return self.nome
+
+
 class Atividade(models.Model):
     nome = models.CharField(max_length=100)
 
@@ -32,7 +44,17 @@ class Crianca(models.Model):
     bairro = models.CharField(max_length=100, blank=True)
     cep = models.CharField(max_length=8, blank=True)
     telefone_responsavel = models.CharField(max_length=11, blank=True)
-
+    responsavel = models.ManyToManyField(Responsavel)
+    
+    
+    @property
+    def nomes_responsaveis(self):
+        return ", ".join([responsavel.nome for responsavel in self.responsavel.all()])
+    
+    @property
+    def responsavel_grau_de_parentesco(self):
+        return ", ".join([responsavel.grau_de_parentesco for responsavel in self.responsavel.all()])
+    
     @property
     def idade(self):
         # Calcula a idade dinamicamente
