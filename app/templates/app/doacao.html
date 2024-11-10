@@ -1,79 +1,84 @@
-{% extends './partials/base.html' %}
-{% load static %}
+{% extends './partials/base.html' %} {% load static %} {% block title %} Quero
+Doar {% endblock %} {% block content %}
 
-{% block title %}
-Quero Doar
-{% endblock %}
-
-
-
-
-
-{% block content %}
-
-
-
-<img class="bannerdoacao" src="{% static 'img/doacao-banner.jpg'%}">
-
-
+<img class="bannerdoacao" src="{% static 'img/doacao-banner.jpg'%}" />
 
 <section class="container">
   <div class="sobre-container-doacao" data-aos="fade-up">
     <div class="sobre-item-doacao">
       <h1 class="title">Doação</h1>
-      <p>Em Bluemanu, muitas crianças enfrentam desafios significativos devido à vulnerabilidade social. A ONG, com suas unidades em Erich Belz e Vila Jensen, desempenha um papel crucial ao oferecer apoio fundamental como alimentação, educação e suporte emocional para esses jovens que precisam de ajuda.</p>
-      <br>
-      <p>Sua doação é vital para garantir que esses serviços continuem a funcionar e se expandam, permitindo que mais crianças superem suas dificuldades e tenham acesso a uma vida mais digna. Além disso, sua contribuição apoia projetos que promovem inclusão social e criam oportunidades de crescimento para esses jovens, abrindo portas para um futuro mais brilhante.</p>
+      <p>
+        Em Bluemanu, muitas crianças enfrentam desafios significativos devido à
+        vulnerabilidade social. A ONG, com suas unidades em Erich Belz e Vila
+        Jensen, desempenha um papel crucial ao oferecer apoio fundamental como
+        alimentação, educação e suporte emocional para esses jovens que precisam
+        de ajuda.
+      </p>
+      <br />
+      <p>
+        Sua doação é vital para garantir que esses serviços continuem a
+        funcionar e se expandam, permitindo que mais crianças superem suas
+        dificuldades e tenham acesso a uma vida mais digna. Além disso, sua
+        contribuição apoia projetos que promovem inclusão social e criam
+        oportunidades de crescimento para esses jovens, abrindo portas para um
+        futuro mais brilhante.
+      </p>
     </div>
   </div>
 </section>
 
-
 <div class="carrossel-doacao" data-aos="fade-right">
-
-  <div class='slider'>
-
+  <div class="slider">
     <div class="slides">
-      <input type="radio" name="radio-btn" id="radio1">
-      <input type="radio" name="radio-btn" id="radio2">
-      <input type="radio" name="radio-btn" id="radio3">
-      <input type="radio" name="radio-btn" id="radio4">
+      <input type="radio" name="radio-btn" id="radio1" />
+      <input type="radio" name="radio-btn" id="radio2" />
+      <input type="radio" name="radio-btn" id="radio3" />
+      <input type="radio" name="radio-btn" id="radio4" />
 
-      <div class="slide first"> <!--inicio de imagens -->
-        <img src="{%static 'img/50real.jpg'%}" alt="imagem 1">
+      <div class="slide first">
+        <!--inicio de imagens -->
+        <img src="{%static 'img/50real.jpg'%}" alt="imagem 1" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 50</h1><br>
+            <h1>R$ 50</h1>
+            <br />
             <p>Apoia na aquisição de materiais didáticos.</p>
           </div>
         </div>
       </div>
 
       <div class="slide">
-        <img src="{%static 'img/100real.jpg'%}" alt="imagem 2">
+        <img src="{%static 'img/100real.jpg'%}" alt="imagem 2" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 100</h1><br>
-            <p>Apoia o projeto alimentar na aquisição de refeições para as crianças.</p>
+            <h1>R$ 100</h1>
+            <br />
+            <p>
+              Apoia o projeto alimentar na aquisição de refeições para as
+              crianças.
+            </p>
           </div>
         </div>
       </div>
 
       <div class="slide">
-        <img src="{%static 'img/250real.jpg'%}" alt="imagem 3">
+        <img src="{%static 'img/250real.jpg'%}" alt="imagem 3" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 250</h1><br>
+            <h1>R$ 250</h1>
+            <br />
             <p>Apoia na elaboração de novos eventos para os nossos alunos.</p>
           </div>
         </div>
       </div>
 
-      <div class="slide"> <!--fim de imagens -->
-        <img src="{%static 'img/1000real.jpg'%}" alt="imagem 4">
+      <div class="slide">
+        <!--fim de imagens -->
+        <img src="{%static 'img/1000real.jpg'%}" alt="imagem 4" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 1000</h1><br>
+            <h1>R$ 1000</h1>
+            <br />
             <p>Apoia o trabalho mensal dos professores da ONG.</p>
           </div>
         </div>
@@ -92,90 +97,143 @@ Quero Doar
         <label for="radio3" class="manual-btn"></label>
         <label for="radio4" class="manual-btn"></label>
       </div>
-
     </div>
   </div>
-
-
-
 </div>
-
 
 <div class="fundo-valores">
-  <!-- <section class="container">
-    <div class="container-outside-valores">
-      <div class="container-inside-valores">
-       
+  <div class="donation-form">
+      <h2>Selecione o Valor</h2>
+
+      <div class="custom-radio">
+        <input id="radio-1" type="radio" name="amount" value="50" checked />
+        <label for="radio-1" class="amount-option">
+          <span>
+            <div class="vai">
+              <p>R$ 50,00</p>
+            </div>
+          </span>
+        </label>
       </div>
+
+      <div class="custom-radio">
+        <input id="radio-2" type="radio" name="amount" value="100" />
+        <label for="radio-2" class="amount-option">
+          <span>
+            <div class="vai">
+              <p>R$ 100,00</p>
+            </div>
+          </span>
+        </label>
+      </div>
+
+      <div class="custom-radio">
+        <input id="radio-3" type="radio" name="amount" value="250" />
+        <label for="radio-3" class="amount-option">
+          <span>
+            <div class="vai">
+              <p>R$ 250,00</p>
+            </div>
+          </span>
+        </label>
+      </div>
+
+      <div class="custom-radio">
+        <input id="radio-4" type="radio" name="amount" value="1000" />
+        <label for="radio-4">
+          <span>
+            <div class="vai">
+              <p>R$ 1000,00</p>
+            </div>
+          </span>
+        </label>
+      </div>
+
+      <div class="custom-radio especial-radio">
+        <input id="radio-5" type="radio" name="amount" value="1000" />
+        <label for="radio-5">
+          <span>
+            <div class="vai">
+              <input id='usounico' type='number' text'hello' placeholder='Digite outro valor'> 
+            </div>
+          </span>
+        </label>
+      </div>
+
+      <div>
+        <textarea placeholder="Nos encaminhe uma mensagem (opcional)"></textarea>
+        {% comment %} <input id='ph-valores' type='text' placeholder='Nos encaminhe uma mensagem (opcional)'> {% endcomment %}
+      </div>
+      
+
+      <h3>Informações do doador</h3>
+      <input type="text" placeholder="Nome" required />
+      <input type="text" placeholder="CPF" required />
+      <input type="email" placeholder="Email" required />
+
+      <button>Prosseguir para Pagamento</button>
+    
+      {% comment %}
+      <form action="" method="post">
+        {% csrf_token %} {{ form }}
+        <button type="submit">Doar</button>
+      </form>
+      {% endcomment %}
+    </div>
+  </div>
+    <div class="frase">
+      <p>Doações de materias podem ser enviadas para:</p>
+      <br /><br />
+      <p class="second">Rua Erich Belz, 1257, Itoupava Central, Blumenau</p>
     </div>
 
-  </section> -->
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Doar</button>
-  </form>
-</div>
+    {% endblock content %} {% block script %}
 
-<div class="frase">
-  <p>Doações de materias podem ser enviadas para:</p>
-  <br><br>
-  <p class="second">Rua Erich Belz, 1257, Itoupava Central, Blumenau</p>
-</div>
+    <script>
+      let count = 1;
+      let intervalId;
+      let click = false;
 
-{% endblock content %}
+      document.getElementById('radio1').checked = true;
 
-{% block script %}
-
-
-
-
-<script>
-  let count = 1;
-  let intervalId;
-  let click = false;
-
-  document.getElementById("radio1").checked = true;
-
-  function startCycle() {
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-    intervalId = setInterval(function () {
-      if (!click) {
-        proximagem();
+      function startCycle() {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+        intervalId = setInterval(function () {
+          if (!click) {
+            proximagem();
+          }
+        }, 4500);
       }
-    }, 4500);
-  }
 
-  function proximagem() {
-    count++;
-    if (count > 4) {
-      count = 1;
-    }
+      function proximagem() {
+        count++;
+        if (count > 4) {
+          count = 1;
+        }
 
-    document.getElementById("radio" + count).checked = true;
-  }
+        document.getElementById('radio' + count).checked = true;
+      }
 
-  const radios = document.querySelectorAll('input[name="radio-btn"]');
-  radios.forEach(radio => {
-    radio.addEventListener('click', function () {
-      click = true;
+      const radios = document.querySelectorAll('input[name="radio-btn"]');
+      radios.forEach((radio) => {
+        radio.addEventListener('click', function () {
+          click = true;
+
+          startCycle();
+
+          setTimeout(() => {
+            click = false;
+          }, 500);
+        });
+      });
 
       startCycle();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'js/animation.js' %}"></script>
 
-      setTimeout(() => {
-        click = false;
-      }, 500);
-    });
-  });
-
-  startCycle();
-
-
-
-</script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="{% static 'js/animation.js' %}"></script>
-
-{% endblock script %}
+    {% endblock script %}
+  </div>
+</div>
