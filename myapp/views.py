@@ -1,11 +1,13 @@
 import os
 import base64
 import requests
+from django.contrib import messages
 from dotenv import load_dotenv
 from pix.models import Pagamento
 from django.http import Http404
 from pix.forms import PagamentoForm
 from django.shortcuts import render, redirect
+from events.models import Evento
 # Create your views here.
 load_dotenv(override=True)
 GERENCIANET_PIX_KEY = os.getenv("GERENCIANET_PIX_KEY")
@@ -24,10 +26,19 @@ def transparencia(request):
 
 
 def voluntariado(request):
+   
     return render(request, "app/voluntariado.html", {"idBody": "voluntariado"})
 
 
 def contato(request):
+    if(request.method =='POST'):
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        comentario = request.POST.get('comentario')
+        print(nome + ' '+ email + ' '+comentario)
+        messages.success(request, 'mensagem enviada com sucesso!')
+        
+        
     return render(request, "app/contato.html", {"idBody": "contato"})
 
 
@@ -215,7 +226,8 @@ def sucesso(request, id_loc):
 
 
 def eventos(request):
-    return render(request, "app/eventos.html", {"idBody": "eventos"})
+    eventos = Evento.objects.all()
+    return render(request, "app/eventos.html", {"idBody": "eventos", "eventos":eventos})
 
 
 def area_restrita(request):

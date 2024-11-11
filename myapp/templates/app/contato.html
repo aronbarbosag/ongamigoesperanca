@@ -35,8 +35,10 @@
 
       <div class="form-contato" data-aos="fade-left" data-aos-delay="600">
         <h1 style="margin-bottom: 20px">Preencha o formulário abaixo para que possamos ajudar com suas dúvidas!</h1>
+       
         <form action="" method="post">
           {% csrf_token %}
+          
           <div>
             <label for="nome">Nome</label>
             <input type="text" name="nome" id="nome" />
@@ -64,6 +66,10 @@
   </main>
 {% endblock %}
 {% block script %}
+
+
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="{% static 'js/animation.js' %}"></script>
+  
 {% endblock %}
