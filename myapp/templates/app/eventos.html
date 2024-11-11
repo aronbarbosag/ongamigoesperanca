@@ -33,6 +33,27 @@
         </a>
       </div>
     </div>
+    {% if eventos %}
+    {% for el in eventos  %}
+    <div class="evento-item">
+      <h1>{{el.nome}}</h1>
+      <img src="{{el.imagem.url}}" alt="" />
+      <h1>{{el.data}}</h1>
+      <p>
+        Horários: <span class="cp">{{el.hora}}</span>
+      </p>
+      <p>
+        Informações: <span class="cp">47 99957393</span>
+      </p>
+      <div>
+        <a href="{{el.link_postagem}}" target="_blank" class="cp">
+          Ver postagem
+          <img src="{% static 'img/ver-postagem-seta.svg' %}" alt="" />
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
   </main>
 {% endblock %}
 {% block script %}
