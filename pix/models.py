@@ -13,7 +13,6 @@ class Pagamento(models.Model):
 
     # Informações sobre o pagamento
     valor = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor da Cobrança")
-    solicitacao_pagador = models.CharField(max_length=255, null=True, blank=True, verbose_name="Solicitação ao Pagador")
 
     # Dados do Pix
     txid = models.CharField(max_length=255, null=True, blank=True, verbose_name="Txid do Pagamento")
@@ -21,6 +20,8 @@ class Pagamento(models.Model):
     qr_code = models.TextField(max_length=255, null=True, blank=True, verbose_name="QR Code")
     link_visualizacao = models.URLField(null=True, blank=True, verbose_name="Link de Visualização")
     imagem_qrcode = models.TextField(null=True, blank=True, verbose_name="Imagem do QR Code")
+    email = models.EmailField(default='ongamigo@esperanca')
+    mensagem = models.TextField(blank=True, null=True)
     
     # Status do pagamento
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pendente', verbose_name="Status do Pagamento")

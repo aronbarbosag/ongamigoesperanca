@@ -1,6 +1,26 @@
 {% extends './partials/base.html' %} {% load static %} {% block title %} Quero
 Doar {% endblock %} {% block content %}
 
+<div id="modalPagamento" class="modal" style="display: none;">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Pix Gerado com Sucesso!</h2>
+      <p>Nome: <strong>{{ form.cleaned_data.nome }}</strong></p>
+      <p>Nome: <strong>{{ form.cleaned_data.email }}</strong></p>
+      <p>Status: <strong>{{ status }}</strong></p>
+      <p>Valor: <strong>R$ {{ form.cleaned_data.valor }}</strong></p>
+
+      <div class='centerthis'> 
+      <img src="{{ imagem_qrcode }}" alt="QR Code" />
+      <p><a href="{{ link_visualizacao }}" target="_blank" class="visualizar-pagamento">Visualizar pagamento</a></p>
+      <p>{{form.cleaned_data.mensagem }}</p>
+      </div>
+      <div class="mt-4">
+        <a class="btn btn-primary" onclick="copiarTexto('{{ qr_code }}')">Pix copia e cola</a>
+      </div>
+  </div>
+</div>
+
 <img class="bannerdoacao" src="{% static 'img/doacao-banner.jpg'%}" />
 
 <section class="container">
@@ -14,7 +34,7 @@ Doar {% endblock %} {% block content %}
         alimentação, educação e suporte emocional para esses jovens que precisam
         de ajuda.
       </p>
-      <br />
+      <br/>
       <p>
         Sua doação é vital para garantir que esses serviços continuem a
         funcionar e se expandam, permitindo que mais crianças superem suas
@@ -101,12 +121,16 @@ Doar {% endblock %} {% block content %}
   </div>
 </div>
 
-<div class="fundo-valores">
-  <div class="donation-form">
+<form method="post" id='formf' action="{% url 'doacao' %} ">
+  {% csrf_token %}
+  
+  <div class="fundo-valores">
+    <div class="donation-form">
       <h2>Selecione o Valor</h2>
 
+      <!-- Campos customizados com inputs radio -->
       <div class="custom-radio">
-        <input id="radio-1" type="radio" name="amount" value="50" checked />
+        <input id="radio-1" type="radio" name="valor" value="50" onclick="clearCustomValue()" checked/>
         <label for="radio-1" class="amount-option">
           <span>
             <div class="vai">
@@ -115,9 +139,9 @@ Doar {% endblock %} {% block content %}
           </span>
         </label>
       </div>
-
+      
       <div class="custom-radio">
-        <input id="radio-2" type="radio" name="amount" value="100" />
+        <input id="radio-2" type="radio" name="valor" value="100" onclick="clearCustomValue()"/>
         <label for="radio-2" class="amount-option">
           <span>
             <div class="vai">
@@ -126,9 +150,9 @@ Doar {% endblock %} {% block content %}
           </span>
         </label>
       </div>
-
+      
       <div class="custom-radio">
-        <input id="radio-3" type="radio" name="amount" value="250" />
+        <input id="radio-3" type="radio" name="valor" value="250" onclick="clearCustomValue()"/>
         <label for="radio-3" class="amount-option">
           <span>
             <div class="vai">
@@ -137,9 +161,9 @@ Doar {% endblock %} {% block content %}
           </span>
         </label>
       </div>
-
+      
       <div class="custom-radio">
-        <input id="radio-4" type="radio" name="amount" value="1000" />
+        <input id="radio-4" type="radio" name="valor" value="1000" onclick="clearCustomValue()"/>
         <label for="radio-4">
           <span>
             <div class="vai">
@@ -149,38 +173,57 @@ Doar {% endblock %} {% block content %}
         </label>
       </div>
 
+      <!-- Campo de valor personalizado -->
       <div class="custom-radio especial-radio">
-        <input id="radio-5" type="radio" name="amount" value="1000" />
+        <input id="radio-5" type="radio" name="custom" value="custom" onclick="enableCustomValue()"/>
         <label for="radio-5">
           <span>
             <div class="vai">
-              <input id='usounico' type='number' text'hello' placeholder='Digite outro valor'> 
+              <input id="usounico" type="number" name="valor" placeholder="Digite outro valor" pattern="^\d+(\.\d{1,2})?$" disabled>
             </div>
           </span>
         </label>
       </div>
 
-      <div>
-        <textarea placeholder="Nos encaminhe uma mensagem (opcional)"></textarea>
-        {% comment %} <input id='ph-valores' type='text' placeholder='Nos encaminhe uma mensagem (opcional)'> {% endcomment %}
-      </div>
       
 
-      <h3>Informações do doador</h3>
-      <input type="text" placeholder="Nome" required />
-      <input type="text" placeholder="CPF" required />
-      <input type="email" placeholder="Email" required />
+      <!-- Textarea para mensagem -->
+      <div>
+        <textarea name="mensagem" placeholder="Nos encaminhe uma mensagem (opcional)"></textarea>
+      </div>
+      
+      <br>
+      <h3>Informações do Doador</h3>
+      <hr>
+      <br>
 
-      <button>Prosseguir para Pagamento</button>
-    
-      {% comment %}
-      <form action="" method="post">
-        {% csrf_token %} {{ form }}
-        <button type="submit">Doar</button>
-      </form>
-      {% endcomment %}
+      <div class="input-wrapper-wrapper">
+        <!-- Nome -->
+        <div class="input-wrapper">
+          <label class='label-down' for="nome">Nome</label>
+          <input class='input-down' type="text" id="nome" name="nome" required>
+        </div>
+
+        <!-- CPF -->
+        <div class="input-wrapper">
+          <label class='label-down' for="cpf">CPF</label>
+          <input class='input-down' type="text" id="cpf" name="cpf" required>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="input-wrapper">
+        <label class='label-mail' for="mail">Email</label>
+        <input class='input-mail' type="email" id="mail" name="email" required>
+      </div>
+      
+      <button type="submit">Prosseguir para Pagamento</button>
     </div>
   </div>
+</form>
+
+
+
     <div class="frase">
       <p>Doações de materias podem ser enviadas para:</p>
       <br /><br />
@@ -190,12 +233,25 @@ Doar {% endblock %} {% block content %}
     {% endblock content %} {% block script %}
 
     <script>
+      // Função para copiar texto para a área de transferência
+      function copiarTexto(texto) {
+        navigator.clipboard
+          .writeText(texto)
+          .then(() => {
+            alert('Texto copiado com sucesso!');
+          })
+          .catch((err) => {
+            alert('Falha ao copiar texto: ' + err);
+          });
+      }
+    
+      // Script para realizar o ciclo de seleção automática de rádio
       let count = 1;
       let intervalId;
       let click = false;
-
+    
       document.getElementById('radio1').checked = true;
-
+    
       function startCycle() {
         if (intervalId) {
           clearInterval(intervalId);
@@ -206,31 +262,79 @@ Doar {% endblock %} {% block content %}
           }
         }, 4500);
       }
-
+    
       function proximagem() {
         count++;
         if (count > 4) {
           count = 1;
         }
-
+    
         document.getElementById('radio' + count).checked = true;
       }
-
+    
+      // Evento para quando o usuário clica em um rádio, o ciclo é interrompido temporariamente
       const radios = document.querySelectorAll('input[name="radio-btn"]');
       radios.forEach((radio) => {
         radio.addEventListener('click', function () {
           click = true;
-
+    
           startCycle();
-
+    
           setTimeout(() => {
             click = false;
           }, 500);
         });
       });
-
+    
       startCycle();
+      
+      // Código para gerenciar o modal de pagamento
+      document.addEventListener('DOMContentLoaded', function () {
+        {% if qr_code %}
+          // Exibe o modal
+          var modal = document.getElementById("modalPagamento");
+          var span = document.getElementsByClassName("close")[0];
+          modal.style.display = "block";
+          
+          // Fecha o modal quando o usuário clicar no "x"
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+    
+          // Fecha o modal se o usuário clicar fora da janela
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+        {% endif %}
+      });
     </script>
+
+    <script>
+      function clearCustomValue() {
+        // Limpa o campo de valor personalizado
+        document.getElementById('usounico').value = ''; 
+        document.getElementById('usounico').disabled = true; // Desabilita o campo
+    
+        // Desmarca o radio button de valor personalizado
+        const customRadio = document.getElementById('radio-5');
+        customRadio.checked = false; 
+      }
+    
+      function enableCustomValue() {
+        document.getElementById('usounico').disabled = false; // Habilita o campo de valor personalizado
+    
+        // Desmarca os outros radio buttons
+        const radios = document.getElementsByName('valor');
+        for (let radio of radios) {
+          if (radio !== document.getElementById('radio-5')) {
+            radio.checked = false; // Desmarcar todos os outros radio buttons
+          }
+        }
+      }
+    </script>
+    <!-- Bibliotecas externas -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{% static 'js/animation.js' %}"></script>
 

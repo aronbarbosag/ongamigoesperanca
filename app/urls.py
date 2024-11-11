@@ -10,6 +10,7 @@ urlpatterns = [
     path("doacao/", views.doacao, name="doacao"),
     path("eventos/", views.eventos, name="eventos"),
     path("area-restrita/", views.area_restrita, name="area-restrita"),
+    path("sucesso/<str:id_loc>/", views.sucesso, name="sucesso"),
 
 
 
