@@ -7,7 +7,10 @@ from pix.models import Pagamento
 from django.http import Http404
 from pix.forms import PagamentoForm
 from django.shortcuts import render, redirect
-from events.models import Evento
+from events.models import Evento, Voluntario
+from django.contrib.auth import authenticate, login, logout
+from .forms import ContatoForm
+
 # Create your views here.
 load_dotenv(override=True)
 GERENCIANET_PIX_KEY = os.getenv("GERENCIANET_PIX_KEY")
@@ -32,14 +35,22 @@ def voluntariado(request):
 
 def contato(request):
     if(request.method =='POST'):
-        nome = request.POST.get('nome')
-        email = request.POST.get('email')
-        comentario = request.POST.get('comentario')
-        print(nome + ' '+ email + ' '+comentario)
-        messages.success(request, 'mensagem enviada com sucesso!')
+        form = ContatoForm(request.POST)
+        if form.is_valid():
+            nome = form.cleaned_data['nome']
+            email = form.cleaned_data['email']
+            comentario = form.cleaned_data['comentario']
+            
+            dados_voluntario = Voluntario(nome = nome,email=email, comentario= comentario)
+            dados_voluntario.save()
+            messages.success(request, 'mensagem enviada com sucesso!')
+        else:
+             messages.error(request, 'Por favor, corrija os erros abaixo.')
+    else:
+        form = ContatoForm()  
         
         
-    return render(request, "app/contato.html", {"idBody": "contato"})
+    return render(request, "app/contato.html", {"idBody": "contato","form":form})
 
 
 def doacao(request):
@@ -230,8 +241,24 @@ def eventos(request):
     return render(request, "app/eventos.html", {"idBody": "eventos", "eventos":eventos})
 
 
+
 def area_restrita(request):
-    return render(request, "app/area-restrita.html", {"idBody": "area-restrita"})
+  if request.user.is_authenticated:
+        return redirect('/secret-admin/')  
+    
+  if (request.method == 'POST'):
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/secret-admin/')
+        else:
+            messages.error(request, 'Usuário ou senha inválidos.')
+  return render(request, "app/area-restrita.html", {"idBody": "area-restrita"})
+
 
 
 def custom_404(request, exception):

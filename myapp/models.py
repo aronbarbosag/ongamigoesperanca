@@ -27,7 +27,7 @@ class Responsavel(models.Model):
     email = models.EmailField(blank=True, null=True)
     profissao = models.CharField(max_length=100, blank=True, null=True)
     local_de_trabalho = models.CharField(max_length=200, blank=True, null=True)
-    grau_de_parentesco = models.CharField(max_length=50, blank=True, null=True)
+    grau_de_parentesco = models.CharField(max_length=50)
     
     def __str__(self):
         return self.nome
@@ -103,3 +103,7 @@ class Participacao(models.Model):
     class Meta:
         verbose_name_plural = "Participações das crianças"
 
+    def nome_crianca(self):
+        return self.nome.nome
+    nome_crianca.admin_order_field = 'nome'
+    nome_crianca.short_description = 'Nome da Criança'

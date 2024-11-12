@@ -10,8 +10,9 @@ class CriancaAdmin(admin.ModelAdmin):
     list_display = ('nome', 'idade_calculada','nome_filial',
                     'escola',  'turno', 'rua','nomes_responsaveis','responsavel_grau_de_parentesco' ,'telefone_responsavel')
     search_fields = ('nome',)
+    
 
-    list_filter = ('nome', 'data_de_nascimento')
+    list_filter = ('data_de_nascimento',)
     
     list_per_page = (15)
 
@@ -36,11 +37,14 @@ class AtividadeAdmin(admin.ModelAdmin):
 class ParticipacaoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'atividade', 'data_inicio', 'data_fim', 'status')
     list_filter = ('atividade', 'status')
-    list_per_page = (10)
+    search_fields = ('nome__nome',)
+    list_per_page = (15)
 
 class ResponsavelAdmin(admin.ModelAdmin):
     list_display = ('nome','telefone','email','grau_de_parentesco')
     list_per_page = (15)
+    search_fields = ('nome','telefone')
+    
 
 admin.site.site_header= "Painel de Administração"
 admin.site.site_title = "Painel de Administração"
