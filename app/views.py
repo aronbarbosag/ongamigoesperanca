@@ -12,27 +12,24 @@ from django.views.decorators.csrf import csrf_exempt
 load_dotenv(override=True)
 GERENCIANET_PIX_KEY = os.getenv("GERENCIANET_PIX_KEY")
 
+url_homologacao = "https://pix-h.api.efipay.com.br"
+url_producao = "https://pix.api.efipay.com.br"
 
 def index(request):
     return render(request, "app/index.html", {"idBody": " "})
 
-
 def sobre(request):
     return render(request, "app/sobre.html", {"idBody": "sobre"})
-
 
 def transparencia(request):
     return render(request, "app/transparencia.html", {"idBody": "transparencia"})
 
-
 def voluntariado(request):
     return render(request, "app/voluntariado.html", {"idBody": "voluntariado"})
-
 
 def contato(request):
     return render(request, "app/contato.html", {"idBody": "contato"})
 
-@csrf_exempt
 def doacao(request):
     if request.method == 'POST':
         
@@ -45,7 +42,7 @@ def doacao(request):
 def processar_formulario(request):
     form = PagamentoForm(request.POST)
     if form.is_valid():
-        valor = form.cleaned_data.get('valor', None)  # Use o get() para garantir que não seja None
+        valor = form.cleaned_data.get('valor', None)
         
         if valor == "custom":  # Caso o valor personalizado esteja selecionado
             valor = request.POST.get("valor_personalizado", None)
@@ -102,12 +99,14 @@ def obter_access_token():
     Função que faz a requisição para o endpoint OAuth para obter o access_token.
     Retorna o access_token obtido da resposta.
     """
-    url = "https://pix-h.api.efipay.com.br/oauth/token"
+
+    url_token = f"{url_producao}/oauth/token"
+
 
     # Recuperando as credenciais do arquivo .env
-    client_id = os.getenv("CLIENT_ID_HOMOLOGACAO")
-    client_secret = os.getenv("CLIENT_SECRET_HOMOLOGACAO")
-    cert_file = os.getenv("CERT_FILE_HOMOLOGACAO")
+    client_id = os.getenv("CLIENT_ID_PRODUCAO") # mudar para homologacao ou producao
+    client_secret = os.getenv("CLIENT_SECRET_PRODUCAO") # mudar para homologacao ou producao
+    cert_file = os.getenv("CERT_FILE_PRODUCAO") # mudar para homologacao ou producao
 
     if not client_id or not client_secret:
         raise ValueError("CLIENT_ID e CLIENT_SECRET devem estar definidos no arquivo .env.")
@@ -126,7 +125,7 @@ def obter_access_token():
     }
 
     try:
-        response = requests.post(url, data=data, headers=headers, cert=cert_file)
+        response = requests.post(url_token, data=data, headers=headers, cert=cert_file)
         response.raise_for_status()
 
         access_token = response.json().get('access_token')
@@ -141,10 +140,10 @@ def formatar_valor(valor):
     """Formata o valor para garantir que tenha 2 casas decimais."""
     return "{:.2f}".format(valor)
 
-
 def criar_payload(pagamento):
     """Cria o payload para a solicitação de cobrança."""
     valor_formatado = formatar_valor(pagamento.valor)
+    print(GERENCIANET_PIX_KEY)
     return {
         "calendario": {"expiracao": 3600},
         "devedor": {"cpf": pagamento.cpf, "nome": pagamento.nome},
@@ -153,27 +152,25 @@ def criar_payload(pagamento):
         "solicitacaoPagador": "Informe o número ou identificador do pedido."
     }
 
-
 def enviar_requisicao_cobranca(payload, access_token):
     """Envia a solicitação de criação de cobrança e retorna a resposta."""
-    url = "https://pix-h.api.efipay.com.br/v2/cob"
+    url_cob = f"{url_producao}/v2/cob"
     headers = {'Authorization': f'Bearer {access_token}'}
-    cert_file = os.getenv("CERT_FILE_HOMOLOGACAO")
+    cert_file = os.getenv("CERT_FILE_PRODUCAO")
 
     try:
-        response = requests.post(url, json=payload, headers=headers, cert=cert_file, timeout=30)
+        response = requests.post(url_cob, json=payload, headers=headers, cert=cert_file, timeout=30)
         response.raise_for_status()
         # print(f"Resposta da cobrança: {response.json()}")
         return response.json()
     except requests.exceptions.RequestException as e:
         raise Exception(f"Erro na requisição de cobrança: {e}")
 
-
 def obter_detalhes_cobranca(id_loc, access_token):
     """Obtém os detalhes da cobrança pelo id_loc."""
-    detalhes_url = f"https://pix-h.api.efipay.com.br/v2/loc/{id_loc}/qrcode"
+    detalhes_url = f"{url_producao}/v2/loc/{id_loc}/qrcode"
     headers = {'Authorization': f'Bearer {access_token}'}
-    cert_file = os.getenv("CERT_FILE_HOMOLOGACAO")
+    cert_file = os.getenv("CERT_FILE_PRODUCAO")
 
     try:
         response = requests.get(detalhes_url, headers=headers, cert=cert_file, timeout=20)
@@ -181,7 +178,6 @@ def obter_detalhes_cobranca(id_loc, access_token):
         return response.json()
     except requests.exceptions.RequestException as e:
         raise Exception(f"Erro ao obter detalhes da cobrança: {e}")
-
 
 def sucesso(request, id_loc):
     try:
@@ -191,14 +187,11 @@ def sucesso(request, id_loc):
 
     return render(request, 'pix/sucesso.html', {'pagamento': pagamento})
 
-
 def eventos(request):
     return render(request, "app/eventos.html", {"idBody": "eventos"})
 
-
 def area_restrita(request):
     return render(request, "app/area-restrita.html", {"idBody": "area-restrita"})
-
 
 def custom_404(request, exception):
     return render(request, "app/404.html", {"idBody": "doacao"})
