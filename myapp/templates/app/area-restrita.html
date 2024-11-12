@@ -15,9 +15,16 @@
   <main class="container">
     <form action="" method="post">
       {% csrf_token %}
+      {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
       <div>
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" />
+        <input type="text" name="username" id="nome" />
       </div>
 
       <div>
