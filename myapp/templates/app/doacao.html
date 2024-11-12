@@ -1,79 +1,104 @@
-{% extends './partials/base.html' %}
-{% load static %}
+{% extends './partials/base.html' %} {% load static %} {% block title %} Quero
+Doar {% endblock %} {% block content %}
 
-{% block title %}
-Quero Doar
-{% endblock %}
+<div id="modalPagamento" class="modal" style="display: none;">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Pix Gerado com Sucesso!</h2>
+      <p>Nome: <strong>{{ form.cleaned_data.nome }}</strong></p>
+      <p>Nome: <strong>{{ form.cleaned_data.email }}</strong></p>
+      <p>Status: <strong>{{ status }}</strong></p>
+      <p>Valor: <strong>R$ {{ form.cleaned_data.valor }}</strong></p>
 
+      <div class='centerthis'> 
+      <img src="{{ imagem_qrcode }}" alt="QR Code" />
+      <p><a href="{{ link_visualizacao }}" target="_blank" class="visualizar-pagamento">Visualizar pagamento</a></p>
+      <p>{{form.cleaned_data.mensagem }}</p>
+      </div>
+      <div class="mt-4">
+        <a class="btn btn-primary" onclick="copiarTexto('{{ qr_code }}')">Pix copia e cola</a>
+      </div>
+  </div>
+</div>
 
-
-
-
-{% block content %}
-
-
-
-<img class="bannerdoacao" src="{% static 'img/doacao-banner.jpg'%}">
-
-
+<img class="bannerdoacao" src="{% static 'img/doacao-banner.jpg'%}" />
 
 <section class="container">
   <div class="sobre-container-doacao" data-aos="fade-up">
     <div class="sobre-item-doacao">
       <h1 class="title">Doação</h1>
-      <p>Em Bluemanu, muitas crianças enfrentam desafios significativos devido à vulnerabilidade social. A ONG, com suas unidades em Erich Belz e Vila Jensen, desempenha um papel crucial ao oferecer apoio fundamental como alimentação, educação e suporte emocional para esses jovens que precisam de ajuda.</p>
-      <br>
-      <p>Sua doação é vital para garantir que esses serviços continuem a funcionar e se expandam, permitindo que mais crianças superem suas dificuldades e tenham acesso a uma vida mais digna. Além disso, sua contribuição apoia projetos que promovem inclusão social e criam oportunidades de crescimento para esses jovens, abrindo portas para um futuro mais brilhante.</p>
+      <p>
+        Em Bluemanu, muitas crianças enfrentam desafios significativos devido à
+        vulnerabilidade social. A ONG, com suas unidades em Erich Belz e Vila
+        Jensen, desempenha um papel crucial ao oferecer apoio fundamental como
+        alimentação, educação e suporte emocional para esses jovens que precisam
+        de ajuda.
+      </p>
+      <br/>
+      <p>
+        Sua doação é vital para garantir que esses serviços continuem a
+        funcionar e se expandam, permitindo que mais crianças superem suas
+        dificuldades e tenham acesso a uma vida mais digna. Além disso, sua
+        contribuição apoia projetos que promovem inclusão social e criam
+        oportunidades de crescimento para esses jovens, abrindo portas para um
+        futuro mais brilhante.
+      </p>
     </div>
   </div>
 </section>
 
-
 <div class="carrossel-doacao" data-aos="fade-right">
-
-  <div class='slider'>
-
+  <div class="slider">
     <div class="slides">
-      <input type="radio" name="radio-btn" id="radio1">
-      <input type="radio" name="radio-btn" id="radio2">
-      <input type="radio" name="radio-btn" id="radio3">
-      <input type="radio" name="radio-btn" id="radio4">
+      <input type="radio" name="radio-btn" id="radio1" />
+      <input type="radio" name="radio-btn" id="radio2" />
+      <input type="radio" name="radio-btn" id="radio3" />
+      <input type="radio" name="radio-btn" id="radio4" />
 
-      <div class="slide first"> <!--inicio de imagens -->
-        <img src="{%static 'img/50real.jpg'%}" alt="imagem 1">
+      <div class="slide first">
+        <!--inicio de imagens -->
+        <img src="{%static 'img/50real.jpg'%}" alt="imagem 1" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 50</h1><br>
+            <h1>R$ 50</h1>
+            <br />
             <p>Apoia na aquisição de materiais didáticos.</p>
           </div>
         </div>
       </div>
 
       <div class="slide">
-        <img src="{%static 'img/100real.jpg'%}" alt="imagem 2">
+        <img src="{%static 'img/100real.jpg'%}" alt="imagem 2" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 100</h1><br>
-            <p>Apoia o projeto alimentar na aquisição de refeições para as crianças.</p>
+            <h1>R$ 100</h1>
+            <br />
+            <p>
+              Apoia o projeto alimentar na aquisição de refeições para as
+              crianças.
+            </p>
           </div>
         </div>
       </div>
 
       <div class="slide">
-        <img src="{%static 'img/250real.jpg'%}" alt="imagem 3">
+        <img src="{%static 'img/250real.jpg'%}" alt="imagem 3" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 250</h1><br>
+            <h1>R$ 250</h1>
+            <br />
             <p>Apoia na elaboração de novos eventos para os nossos alunos.</p>
           </div>
         </div>
       </div>
 
-      <div class="slide"> <!--fim de imagens -->
-        <img src="{%static 'img/1000real.jpg'%}" alt="imagem 4">
+      <div class="slide">
+        <!--fim de imagens -->
+        <img src="{%static 'img/1000real.jpg'%}" alt="imagem 4" />
         <div class="info">
           <div class="ctrl">
-            <h1>R$ 1000</h1><br>
+            <h1>R$ 1000</h1>
+            <br />
             <p>Apoia o trabalho mensal dos professores da ONG.</p>
           </div>
         </div>
@@ -92,97 +117,227 @@ Quero Doar
         <label for="radio3" class="manual-btn"></label>
         <label for="radio4" class="manual-btn"></label>
       </div>
-
     </div>
   </div>
-
-
-
 </div>
 
+<form method="post" id='formf' action="{% url 'doacao' %} ">
+  {% csrf_token %}
+  
+  <div class="fundo-valores">
+    <div class="donation-form">
+      <h2>Selecione o Valor</h2>
 
-<div class="fundo-valores">
-  <!-- <section class="container">
-    <div class="container-outside-valores">
-      <div class="container-inside-valores">
-       
+      <!-- Campos customizados com inputs radio -->
+      <div class="custom-radio">
+        <input id="radio-1" type="radio" name="valor" value="50" onclick="clearCustomValue()" checked/>
+        <label for="radio-1" class="amount-option">
+          <span>
+            <div class="vai">
+              <p>R$ 50,00</p>
+            </div>
+          </span>
+        </label>
       </div>
+      
+      <div class="custom-radio">
+        <input id="radio-2" type="radio" name="valor" value="100" onclick="clearCustomValue()"/>
+        <label for="radio-2" class="amount-option">
+          <span>
+            <div class="vai">
+              <p>R$ 100,00</p>
+            </div>
+          </span>
+        </label>
+      </div>
+      
+      <div class="custom-radio">
+        <input id="radio-3" type="radio" name="valor" value="250" onclick="clearCustomValue()"/>
+        <label for="radio-3" class="amount-option">
+          <span>
+            <div class="vai">
+              <p>R$ 250,00</p>
+            </div>
+          </span>
+        </label>
+      </div>
+      
+      <div class="custom-radio">
+        <input id="radio-4" type="radio" name="valor" value="1000" onclick="clearCustomValue()"/>
+        <label for="radio-4">
+          <span>
+            <div class="vai">
+              <p>R$ 1000,00</p>
+            </div>
+          </span>
+        </label>
+      </div>
+
+      <!-- Campo de valor personalizado -->
+      <div class="custom-radio especial-radio">
+        <input id="radio-5" type="radio" name="custom" value="custom" onclick="enableCustomValue()"/>
+        <label for="radio-5">
+          <span>
+            <div class="vai">
+              <input id="usounico" type="number" name="valor" placeholder="Digite outro valor" pattern="^\d+(\.\d{1,2})?$" disabled>
+            </div>
+          </span>
+        </label>
+      </div>
+
+      
+
+      <!-- Textarea para mensagem -->
+      <div>
+        <textarea name="mensagem" placeholder="Nos encaminhe uma mensagem (opcional)"></textarea>
+      </div>
+      
+      <br>
+      <h3>Informações do Doador</h3>
+      <hr>
+      <br>
+
+      <div class="input-wrapper-wrapper">
+        <!-- Nome -->
+        <div class="input-wrapper">
+          <label class='label-down' for="nome">Nome</label>
+          <input class='input-down' type="text" id="nome" name="nome" required>
+        </div>
+
+        <!-- CPF -->
+        <div class="input-wrapper">
+          <label class='label-down' for="cpf">CPF</label>
+          <input class='input-down' type="number" id="cpf" name="cpf" required>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="input-wrapper">
+        <label class='label-mail' for="mail">Email</label>
+        <input class='input-mail' type="email" id="mail" name="email" required>
+      </div>
+      
+      <button type="submit">Prosseguir para Pagamento</button>
+    </div>
+  </div>
+</form>
+
+
+
+    <div class="frase">
+      <p>Doações de materias podem ser enviadas para:</p>
+      <br /><br />
+      <p class="second">Rua Erich Belz, 1257, Itoupava Central, Blumenau</p>
     </div>
 
-  </section> -->
-  <section>
-    <div class="product">
-      <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
-      <div class="description">
-        <h3>Stubborn Attachments</h3>
-        <h5>$20.00</h5>
-      </div>
-    </div>
-    <form action="/create-checkout-session" method="POST">
-      <button type="submit" id="checkout-button">Checkout</button>
-    </form>
-  </section>
-</div>
+    {% endblock content %} {% block script %}
 
-<div class="frase">
-  <p>Doações de materias podem ser enviadas para:</p>
-  <br><br>
-  <p class="second">Rua Erich Belz, 1257, Itoupava Central, Blumenau</p>
-</div>
-
-{% endblock content %}
-
-{% block script %}
-<script src="https://js.stripe.com/v3/"></script>
-
-
-
-<script>
-  let count = 1;
-  let intervalId;
-  let click = false;
-
-  document.getElementById("radio1").checked = true;
-
-  function startCycle() {
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-    intervalId = setInterval(function () {
-      if (!click) {
-        proximagem();
+    <script>
+      // Função para copiar texto para a área de transferência
+      function copiarTexto(texto) {
+        navigator.clipboard
+          .writeText(texto)
+          .then(() => {
+            alert('Texto copiado com sucesso!');
+          })
+          .catch((err) => {
+            alert('Falha ao copiar texto: ' + err);
+          });
       }
-    }, 4500);
-  }
-
-  function proximagem() {
-    count++;
-    if (count > 4) {
-      count = 1;
-    }
-
-    document.getElementById("radio" + count).checked = true;
-  }
-
-  const radios = document.querySelectorAll('input[name="radio-btn"]');
-  radios.forEach(radio => {
-    radio.addEventListener('click', function () {
-      click = true;
-
+    
+      // Script para realizar o ciclo de seleção automática de rádio
+      let count = 1;
+      let intervalId;
+      let click = false;
+    
+      document.getElementById('radio1').checked = true;
+    
+      function startCycle() {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+        intervalId = setInterval(function () {
+          if (!click) {
+            proximagem();
+          }
+        }, 4500);
+      }
+    
+      function proximagem() {
+        count++;
+        if (count > 4) {
+          count = 1;
+        }
+    
+        document.getElementById('radio' + count).checked = true;
+      }
+    
+      // Evento para quando o usuário clica em um rádio, o ciclo é interrompido temporariamente
+      const radios = document.querySelectorAll('input[name="radio-btn"]');
+      radios.forEach((radio) => {
+        radio.addEventListener('click', function () {
+          click = true;
+    
+          startCycle();
+    
+          setTimeout(() => {
+            click = false;
+          }, 500);
+        });
+      });
+    
       startCycle();
+      
+      // Código para gerenciar o modal de pagamento
+      document.addEventListener('DOMContentLoaded', function () {
+        {% if qr_code %}
+          // Exibe o modal
+          var modal = document.getElementById("modalPagamento");
+          var span = document.getElementsByClassName("close")[0];
+          modal.style.display = "block";
+          
+          // Fecha o modal quando o usuário clicar no "x"
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+    
+          // Fecha o modal se o usuário clicar fora da janela
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+        {% endif %}
+      });
+    </script>
 
-      setTimeout(() => {
-        click = false;
-      }, 500);
-    });
-  });
+    <script>
+      function clearCustomValue() {
+        // Limpa o campo de valor personalizado
+        document.getElementById('usounico').value = ''; 
+        document.getElementById('usounico').disabled = true; // Desabilita o campo
+    
+        // Desmarca o radio button de valor personalizado
+        const customRadio = document.getElementById('radio-5');
+        customRadio.checked = false; 
+      }
+    
+      function enableCustomValue() {
+        document.getElementById('usounico').disabled = false; // Habilita o campo de valor personalizado
+    
+        // Desmarca os outros radio buttons
+        const radios = document.getElementsByName('valor');
+        for (let radio of radios) {
+          if (radio !== document.getElementById('radio-5')) {
+            radio.checked = false; // Desmarcar todos os outros radio buttons
+          }
+        }
+      }
+    </script>
+    <!-- Bibliotecas externas -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'js/animation.js' %}"></script>
 
-  startCycle();
-
-
-
-</script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="{% static 'js/animation.js' %}"></script>
-
-{% endblock script %}
+    {% endblock script %}
+  </div>
+</div>
